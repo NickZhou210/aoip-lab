@@ -118,6 +118,16 @@ Generated files go to:
 project2_rtp_audio_stream/sdp/generated/
 ```
 
+## Phase 8: run a loopback test
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_stream_pair.py --stream 1
+```
+
+This starts receiver and sender for one configured stream, then checks the WAV
+output.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

@@ -310,3 +310,10 @@ Now the core pattern is:
 ```text
 one stream plan -> sender, receiver, and SDP
 ```
+
+The local loopback test runner checks one stream end to end:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_stream_pair.py --stream 1
+```
