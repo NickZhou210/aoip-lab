@@ -1,0 +1,11 @@
+# Generated audio and packet captures
+*.wav
+*.pcap
+*.pcapng
+*.log
+
+# Local caches and environments
+.venv/
+__pycache__/
+.DS_Store
+
