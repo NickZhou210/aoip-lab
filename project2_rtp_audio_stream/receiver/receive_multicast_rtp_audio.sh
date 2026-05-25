@@ -4,18 +4,19 @@ set -euo pipefail
 GROUP="${1:-239.69.1.1}"
 PORT="${2:-5004}"
 OUTPUT="${3:-test-multicast.wav}"
+IFACE="${4:-enp0s5}"
 
 echo "Starting multicast RTP L16 receiver..."
 echo "Group: ${GROUP}"
 echo "Listening on UDP port ${PORT}"
 echo "Writing WAV file: ${OUTPUT}"
+echo "Interface: ${IFACE}"
 
 gst-launch-1.0 -v \
-udpsrc multicast-group="${GROUP}" auto-multicast=true port="${PORT}" \
+udpsrc multicast-group="${GROUP}" multicast-iface="${IFACE}" auto-multicast=true port="${PORT}" \
 caps="application/x-rtp,media=audio,encoding-name=L16,clock-rate=48000,channels=1,payload=96" ! \
 rtpjitterbuffer latency=50 ! \
 rtpL16depay ! \
 audioconvert ! \
 wavenc ! \
 filesink location="${OUTPUT}"
-

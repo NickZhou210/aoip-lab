@@ -51,6 +51,25 @@ cd ~/aoip-lab/project2_rtp_audio_stream/sender
 
 This uses multicast group `239.69.1.1` and UDP port `5004`.
 
+## Phase 3: inspect RTP headers
+
+Terminal 1:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./inspect_rtp_packets.py --group 127.0.0.1 --count 10
+```
+
+Terminal 2:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/sender
+./send_rtp_audio.sh
+```
+
+Use unicast first for RTP header learning. Multicast is a separate network-layer
+step and may need VM or switch configuration.
+
 ## Capture RTP
 
 ```bash

@@ -193,3 +193,32 @@ The current project has RTP audio. Full AES67 still needs:
 - receiver compatibility with other AES67 devices/software.
 - clear channel mapping.
 
+## Next Practical Skill: Reading RTP Headers
+
+After multicast works, inspect the RTP header itself:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./inspect_rtp_packets.py --group 127.0.0.1 --count 10
+```
+
+Then start:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/sender
+./send_rtp_audio.sh
+```
+
+Use unicast for the first RTP header lesson because it removes multicast
+interface behavior from the experiment. After the RTP fields make sense, return
+to multicast and debug it as a network-layer problem.
+
+The key learning is:
+
+```text
+sequence number = packet order
+timestamp = audio time
+payload type = codec mapping
+SSRC = stream identity
+payload bytes = audio carried in that packet
+```
