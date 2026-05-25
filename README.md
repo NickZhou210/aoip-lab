@@ -265,6 +265,13 @@ cd ~/aoip-lab
 project1_packet_dump/scripts/run_ptp_rtp_capture_test.sh enp0s5 10.211.55.6 12
 ```
 
+To derive an RTP timestamp to reference-time anchor from that pcap:
+
+```bash
+cd ~/aoip-lab
+project3_ptp/scripts/derive_rtp_ptp_anchor_from_pcap.py project1_packet_dump/captures/<combined-ptp-rtp-capture>.pcap
+```
+
 ## Phase 17: sender performance probe
 
 ```bash

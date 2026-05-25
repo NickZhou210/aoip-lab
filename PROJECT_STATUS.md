@@ -587,6 +587,36 @@ sequence breaks: 0
 timestamp breaks: 0
 ```
 
+### RTP Timestamp to PTP Anchor
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/derive_rtp_ptp_anchor_from_pcap.py
+project3_ptp/notes/phase32_rtp_ptp_anchor.md
+```
+
+Purpose:
+
+```text
+explain and calculate the anchor between RTP media time and a shared reference time.
+use pcap timestamps as the observable reference for this lab.
+make clear that this is not yet a true PTP-locked media clock.
+```
+
+Verified with Phase 31 capture:
+
+```text
+capture: project1_packet_dump/captures/ptp-and-multicast-rtp-enp0s5-20260525-171752.pcap
+streams analyzed: 16
+sample_rate: 48000 Hz
+stream-01 media_span_ms: 1166.000, capture_span_ms: 1165.928, span_error_ms: -0.072
+stream-08 media_span_ms: 733.000, capture_span_ms: 733.009, span_error_ms: 0.009
+stream-16 media_span_ms: 188.000, capture_span_ms: 187.973, span_error_ms: -0.027
+```
+
 ### Multi-Stream Synchronization
 
 Started.
