@@ -216,15 +216,32 @@ Each stream locally produced an 8-channel, 48 kHz WAV file.
 
 ### PTP
 
-Not done.
+Started.
 
 PTP is required for real AES67 clock synchronization.
 
+Current finding:
+
+```text
+enp0s5 has software timestamping only
+PTP Hardware Clock: none
+linuxptp package is not installed yet
+systemd-timesyncd/NTP is active
+```
+
+Added:
+
+```text
+project3_ptp/scripts/check_ptp_environment.sh
+project3_ptp/configs/aes67-software-ptp.cfg
+project3_ptp/notes/phase15_ptp_first_checks.md
+```
+
 Still needed:
 
-- install/check linuxptp tools.
-- identify clock-capable network interface.
-- run `ptp4l`.
+- install linuxptp.
+- run environment check again.
+- run first safe `ptp4l` experiment.
 - understand master/slave behavior.
 - measure offset.
 - decide how GStreamer sender should relate to PTP time.
@@ -310,4 +327,3 @@ Next major topic:
 ```text
 PTP
 ```
-

@@ -12,6 +12,7 @@ PROJECT_STATUS.md
 
 - `project1_packet_dump`: tcpdump helpers for RTP, PTP, and general packet capture.
 - `project2_rtp_audio_stream`: GStreamer RTP L16 sender and receiver.
+- `project3_ptp`: PTP environment checks and learning notes.
 - Phase 1 is complete: local RTP L16 loopback can create a WAV file.
 
 Start with [LEARNING_MAP.md](LEARNING_MAP.md) if you want the full logic of how these pieces relate to AoIP and AES67.

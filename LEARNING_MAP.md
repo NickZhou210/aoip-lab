@@ -329,3 +329,9 @@ The all-stream test checks the full 128-channel split:
 ```bash
 ./run_all_streams.py
 ```
+
+PTP learning starts in:
+
+```text
+project3_ptp
+```
