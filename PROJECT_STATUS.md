@@ -365,6 +365,16 @@ Current learning target:
 one command should report ptp4l process state, portState, Grandmaster identity, offset, and path delay
 ```
 
+Verified:
+
+```text
+ptp_status_snapshot.py queried running ptp4l on domain 0
+portState MASTER
+grandmasterIdentity 001c42.fffe.ee3f40
+offsetFromMaster 0.0
+meanPathDelay 0.0
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.
