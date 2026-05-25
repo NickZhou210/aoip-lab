@@ -8,6 +8,8 @@ This repo is a learning lab for RTP audio, packet capture, and AES67 building bl
 - `project2_rtp_audio_stream`: GStreamer RTP L16 sender and receiver.
 - Phase 1 is complete: local RTP L16 loopback can create a WAV file.
 
+Start with [LEARNING_MAP.md](LEARNING_MAP.md) if you want the full logic of how these pieces relate to AoIP and AES67.
+
 ## Phase 1: local RTP L16 loopback
 
 Terminal 1:
@@ -72,3 +74,8 @@ Next AES67 steps are:
 3. Multicast across real network interfaces.
 4. PTP clock synchronization.
 
+The first SDP example is:
+
+```text
+project2_rtp_audio_stream/sdp/rtp-l16-mono.sdp
+```
