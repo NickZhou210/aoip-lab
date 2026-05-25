@@ -98,6 +98,13 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 
 For stream 1, expect `payload_bytes=768` and `delta_ts=48`.
 
+To receive stream 1:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./receive_stream_from_config.py --stream 1
+```
+
 ## Phase 7: generate SDP files
 
 ```bash

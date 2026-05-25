@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -106,9 +107,12 @@ def main() -> None:
     if args.dry_run:
         return
 
-    subprocess.run(command, check=True)
+    try:
+        subprocess.run(command, check=True)
+    except KeyboardInterrupt:
+        print("Interrupted.")
+        sys.exit(130)
 
 
 if __name__ == "__main__":
     main()
-

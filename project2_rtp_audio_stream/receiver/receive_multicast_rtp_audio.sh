@@ -14,7 +14,7 @@ echo "Writing WAV file: ${OUTPUT}"
 echo "Interface: ${IFACE}"
 echo "Channels: ${CHANNELS}"
 
-gst-launch-1.0 -v \
+gst-launch-1.0 -e -v \
 udpsrc multicast-group="${GROUP}" multicast-iface="${IFACE}" auto-multicast=true port="${PORT}" \
 caps="application/x-rtp,media=audio,encoding-name=L16,clock-rate=48000,channels=${CHANNELS},payload=96" ! \
 rtpjitterbuffer latency=50 ! \

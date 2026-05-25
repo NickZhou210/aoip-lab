@@ -297,3 +297,16 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 ```
 
 This keeps sender config and receiver description aligned.
+
+The receiver also reads the same config:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./receive_stream_from_config.py --stream 1
+```
+
+Now the core pattern is:
+
+```text
+one stream plan -> sender, receiver, and SDP
+```

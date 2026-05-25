@@ -10,7 +10,7 @@ echo "Listening on UDP port ${PORT}"
 echo "Writing WAV file: ${OUTPUT}"
 echo "Channels: ${CHANNELS}"
 
-gst-launch-1.0 \
+gst-launch-1.0 -e \
 udpsrc port="${PORT}" caps="application/x-rtp,media=audio,encoding-name=L16,clock-rate=48000,channels=${CHANNELS},payload=96" ! \
 rtpjitterbuffer latency=50 ! \
 rtpL16depay ! \
