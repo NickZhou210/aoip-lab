@@ -161,6 +161,18 @@ cd ~/aoip-lab/project3_ptp/scripts
 This starts `ptp4l` with software timestamping and `free_running=1`, so the first
 PTP lesson can observe logs without intentionally disciplining the system clock.
 
+## Phase 11: query ptp4l status
+
+Keep `ptp4l` running in one terminal, then in a second terminal:
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./query_ptp_status.sh
+```
+
+This uses `pmc` to ask the running `ptp4l` process for its port, parent, current
+time, and grandmaster status.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

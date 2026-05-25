@@ -234,15 +234,33 @@ Added:
 ```text
 project3_ptp/scripts/check_ptp_environment.sh
 project3_ptp/scripts/run_ptp4l_software.sh
+project3_ptp/scripts/query_ptp_status.sh
 project3_ptp/configs/aes67-software-ptp.cfg
 project3_ptp/notes/phase15_ptp_first_checks.md
 project3_ptp/notes/phase16_run_ptp4l_software.md
+project3_ptp/notes/phase17_query_ptp_status.md
+```
+
+First `ptp4l` observe run:
+
+```text
+enp0s5 INITIALIZING -> LISTENING -> MASTER
+selected local clock 001c42.fffe.ee3f40 as best master
+assuming the grand master role
+```
+
+Meaning:
+
+```text
+ptp4l runs successfully
+no external better PTP grandmaster was visible
+the VM became the local software grandmaster
 ```
 
 Still needed:
 
-- run first safe `ptp4l` experiment.
 - understand master/slave behavior.
+- query running `ptp4l` with `pmc`.
 - measure offset.
 - decide how GStreamer sender should relate to PTP time.
 

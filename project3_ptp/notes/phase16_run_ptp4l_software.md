@@ -148,3 +148,51 @@ but there is no external better clock to follow
 
 For AES67 production, we eventually want a clear grandmaster clock and audio
 devices following it. For this phase, we only want to understand the first logs.
+
+## Observed Result On This VM
+
+Command:
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./run_ptp4l_software.sh enp0s5
+```
+
+Observed log:
+
+```text
+port 1 (enp0s5): INITIALIZING to LISTENING on INIT_COMPLETE
+port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+port 1 (enp0s5): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+selected local clock 001c42.fffe.ee3f40 as best master
+port 1 (enp0s5): assuming the grand master role
+```
+
+Meaning:
+
+```text
+ptp4l started successfully
+enp0s5 entered LISTENING state
+no better external PTP clock was heard
+this VM selected its own local clock as best master
+this VM became the grandmaster for this small PTP island
+```
+
+This is the expected result when only one PTP clock is visible.
+
+It proves:
+
+```text
+linuxptp works
+PTP packets/state machine can run on enp0s5
+the VM can act as a software PTP master
+```
+
+It does not prove:
+
+```text
+hardware timestamp precision
+real AES67 network sync quality
+audio sender alignment to PTP time
+```
