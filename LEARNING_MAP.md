@@ -347,3 +347,9 @@ PTP shared time
 -> RTP media timestamp
 -> receiver playback time
 ```
+
+Receiver timing rule:
+
+```text
+playout_time = PTP_anchor + RTP_media_elapsed + receiver_latency
+```

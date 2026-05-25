@@ -301,6 +301,29 @@ rtp_elapsed_ms advances by 1 ms per packet
 payload_bytes = 768
 ```
 
+### Receiver Playout Timing
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/calculate_playout_schedule.py
+project3_ptp/notes/phase19_receiver_playout_timing.md
+```
+
+Updated:
+
+```text
+project2_rtp_audio_stream/scripts/generate_sdp.py can optionally emit RFC 7273 clock lines
+```
+
+Current learning target:
+
+```text
+RTP timestamp + PTP anchor + receiver latency = scheduled playback time
+```
+
 Still needed:
 
 - understand master/slave behavior.

@@ -192,6 +192,26 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 For stream 1, the RTP timestamp should advance by `48` per packet while the
 payload remains `768` bytes.
 
+## Phase 13: receiver playout timing model
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./calculate_playout_schedule.py --count 5
+```
+
+This shows the receiver-side idea:
+
+```text
+RTP timestamp + PTP anchor + receiver latency = scheduled playback time
+```
+
+To generate SDP with RFC 7273 clock lines:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./generate_sdp.py --output-dir ../sdp/generated-ptp --ptp-grandmaster 001c42.fffe.ee3f40
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
