@@ -341,6 +341,13 @@ domainNumber separates independent PTP timing islands
 sender and receiver must use the same PTP domain to share clock
 ```
 
+Verified:
+
+```text
+aes67-domain-1.cfg manually reached MASTER
+VM becomes Grandmaster in domain 1 when no external domain 1 master is visible
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.

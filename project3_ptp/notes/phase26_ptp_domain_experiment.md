@@ -69,6 +69,34 @@ there is no other visible domain 1 Grandmaster
 so this VM becomes master for domain 1
 ```
 
+## Observed Result On Ubuntu
+
+Command:
+
+```bash
+cd ~/aoip-lab/project3_ptp
+sudo timeout 8s ptp4l -i enp0s5 -f configs/aes67-domain-1.cfg -m
+```
+
+Observed:
+
+```text
+port 1 (enp0s5): INITIALIZING to LISTENING on INIT_COMPLETE
+port 0 (/var/run/ptp4l): INITIALIZING to LISTENING on INIT_COMPLETE
+port 0 (/var/run/ptp4lro): INITIALIZING to LISTENING on INIT_COMPLETE
+port 1 (enp0s5): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+selected local clock 001c42.fffe.ee3f40 as best master
+port 1 (enp0s5): assuming the grand master role
+```
+
+Conclusion:
+
+```text
+domain 1 config starts successfully
+no external domain 1 Grandmaster was visible
+the VM becomes MASTER in domain 1
+```
+
 ## What This Proves With One VM
 
 With one VM, this test can prove:
