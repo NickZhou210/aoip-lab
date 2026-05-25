@@ -138,6 +138,43 @@ domain-1: should also become MASTER, but in domain 1
 client-only: should stay LISTENING/UNCALIBRATED or not become MASTER without an external master
 ```
 
+Manual observed result:
+
+Preferred master:
+
+```text
+port 1 (enp0s5): INITIALIZING to LISTENING on INIT_COMPLETE
+port 1 (enp0s5): LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+selected local clock 001c42.fffe.ee3f40 as best master
+port 1 (enp0s5): assuming the grand master role
+```
+
+Meaning:
+
+```text
+the preferred-master config started successfully
+no better external master was visible
+this VM became MASTER
+```
+
+Client-only:
+
+```text
+port 1 (enp0s5): INITIALIZING to LISTENING on INIT_COMPLETE
+selected local clock 001c42.fffe.ee3f40 as best master
+```
+
+Important interpretation:
+
+```text
+the client-only config started successfully
+the 8 second test did not show LISTENING to MASTER
+the log still selected the local clock as best local clock data set
+```
+
+Do not over-interpret this as a useful slave lock. With no external PTP master,
+client-only mode has nothing useful to follow.
+
 We cannot fully verify:
 
 ```text

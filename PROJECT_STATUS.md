@@ -320,6 +320,8 @@ Verified:
 ```text
 summarize_ptp_configs.py reads all five config files on Ubuntu
 sudo is required for live ptp4l config start tests
+preferred-master manually reached MASTER
+client-only manually started and did not show LISTENING to MASTER in the 8 second window
 ```
 
 ### RTP Timestamp And PTP Time
