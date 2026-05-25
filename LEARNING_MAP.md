@@ -353,3 +353,9 @@ Receiver timing rule:
 ```text
 playout_time = PTP_anchor + RTP_media_elapsed + receiver_latency
 ```
+
+Multi-stream alignment rule:
+
+```text
+equivalent sample time across streams -> same PTP playout time
+```

@@ -212,6 +212,19 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 ./generate_sdp.py --output-dir ../sdp/generated-ptp --ptp-grandmaster 001c42.fffe.ee3f40
 ```
 
+## Phase 14: multi-stream PTP alignment model
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./calculate_multistream_alignment.py --packet-index 100
+```
+
+To demonstrate a 1 ms stream offset:
+
+```bash
+./calculate_multistream_alignment.py --packet-index 100 --skew-stream 2 --skew-samples 48
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

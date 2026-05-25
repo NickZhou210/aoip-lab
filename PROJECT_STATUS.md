@@ -324,6 +324,24 @@ Current learning target:
 RTP timestamp + PTP anchor + receiver latency = scheduled playback time
 ```
 
+### Multi-Stream PTP Alignment
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/calculate_multistream_alignment.py
+project3_ptp/notes/phase20_multistream_ptp_alignment.md
+```
+
+Current learning target:
+
+```text
+16 RTP streams are aligned when equivalent RTP media times map to the same PTP playout time
+packet arrival time is not the alignment reference
+```
+
 Still needed:
 
 - understand master/slave behavior.
