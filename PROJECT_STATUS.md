@@ -348,6 +348,23 @@ aes67-domain-1.cfg manually reached MASTER
 VM becomes Grandmaster in domain 1 when no external domain 1 master is visible
 ```
 
+### PTP Status Snapshot
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/ptp_status_snapshot.py
+project3_ptp/notes/phase27_ptp_status_snapshot.md
+```
+
+Current learning target:
+
+```text
+one command should report ptp4l process state, portState, Grandmaster identity, offset, and path delay
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.

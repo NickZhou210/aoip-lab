@@ -283,6 +283,15 @@ sudo timeout 8s ptp4l -i enp0s5 -f configs/aes67-domain-1.cfg -m
 
 This checks that the domain 1 config starts and forms its own timing island.
 
+## Phase 21: PTP status snapshot
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./ptp_status_snapshot.py --domain 0
+```
+
+This summarizes `ptp4l` and `pmc` status in one command.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
