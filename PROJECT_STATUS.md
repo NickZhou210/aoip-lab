@@ -518,6 +518,23 @@ Still needed:
 - verify multicast traffic with tcpdump/Wireshark.
 - test multicast between two machines or VM and host if possible.
 
+Added for packet-level multicast RTP validation:
+
+```text
+project1_packet_dump/scripts/capture_multicast_rtp_16.sh
+project1_packet_dump/scripts/run_multicast_rtp_capture_test.sh
+project1_packet_dump/scripts/summarize_multicast_rtp_capture.py
+project1_packet_dump/notes/phase30_multicast_rtp_packet_capture.md
+```
+
+Checked:
+
+```text
+script syntax is valid.
+summary tool help output works.
+full tcpdump capture must be run from an interactive Ubuntu terminal because sudo needs a password.
+```
+
 ### Multi-Stream Synchronization
 
 Started.

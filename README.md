@@ -251,6 +251,13 @@ For multicast groups from `streams.json`:
 ./run_concurrent_sender_monitor.py --use-config-groups --iface enp0s5 --iface-ip 10.211.55.6 --count 20
 ```
 
+To capture and summarize the 16 multicast RTP streams on the VM interface:
+
+```bash
+cd ~/aoip-lab
+project1_packet_dump/scripts/run_multicast_rtp_capture_test.sh enp0s5 10.211.55.6 8
+```
+
 ## Phase 17: sender performance probe
 
 ```bash
