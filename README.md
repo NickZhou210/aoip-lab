@@ -98,6 +98,19 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 
 For stream 1, expect `payload_bytes=768` and `delta_ts=48`.
 
+## Phase 7: generate SDP files
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./generate_sdp.py
+```
+
+Generated files go to:
+
+```text
+project2_rtp_audio_stream/sdp/generated/
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

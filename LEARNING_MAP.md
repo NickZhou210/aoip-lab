@@ -288,3 +288,12 @@ For `stream-01`, the expected RTP payload is:
 ```text
 48 samples * 2 bytes * 8 channels = 768 bytes
 ```
+
+Next, SDP files are generated from the same config:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./generate_sdp.py
+```
+
+This keeps sender config and receiver description aligned.
