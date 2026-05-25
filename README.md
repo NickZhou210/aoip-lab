@@ -128,6 +128,12 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This starts receiver and sender for one configured stream, then checks the WAV
 output.
 
+To test every configured stream:
+
+```bash
+./run_all_streams.py
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
