@@ -535,6 +535,22 @@ summary tool help output works.
 full tcpdump capture must be run from an interactive Ubuntu terminal because sudo needs a password.
 ```
 
+Verified with interactive Ubuntu run:
+
+```text
+capture: project1_packet_dump/captures/multicast-rtp-enp0s5-20260525-170823.pcap
+packets captured: 10898
+packets dropped by kernel: 0
+configured RTP packets parsed: 10898
+PASS: 16 configured multicast RTP streams found
+UDP payload bytes: 780
+RTP audio payload bytes: 768
+RTP payload type: 96
+sequence breaks: 0
+timestamp breaks: 0
+source IP: 10.211.55.6
+```
+
 ### Multi-Stream Synchronization
 
 Started.

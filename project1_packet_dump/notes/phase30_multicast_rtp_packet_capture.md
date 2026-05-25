@@ -83,6 +83,36 @@ This is different from the approximate `808` byte IP packet size in
 20 bytes IPv4 header + 8 bytes UDP header + 780 bytes UDP payload = 808 bytes
 ```
 
+## Result
+
+Test capture:
+
+```text
+capture: project1_packet_dump/captures/multicast-rtp-enp0s5-20260525-170823.pcap
+size: 8.8M
+tcpdump packets captured: 10898
+tcpdump packets received by filter: 10898
+tcpdump packets dropped by kernel: 0
+configured RTP packets parsed: 10898
+source IP: 10.211.55.6
+```
+
+Summary:
+
+```text
+PASS: 16 configured multicast RTP streams found
+UDP payload bytes = 780
+RTP audio payload bytes = 768
+RTP payload type = 96
+sequence breaks = 0
+timestamp breaks = 0
+```
+
+The per-stream packet counts decrease from stream 1 to stream 16 because the
+senders start one after another while the capture window is fixed. That does not
+indicate packet loss. The important checks are that all 16 groups are present,
+all payload sizes match, and there are no sequence or timestamp breaks.
+
 ## Meaning
 
 If the capture summary passes, the VM is producing the intended multicast RTP
