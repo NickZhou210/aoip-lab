@@ -43,3 +43,11 @@ Why this matters for AES67:
 - timing is reconstructed from RTP timestamps.
 - SDP maps payload type `96` to `L16/48000/1`.
 - packet time can be checked from timestamp deltas.
+
+For the current 1 ms mono L16 sender, you should see:
+
+```text
+delta_seq = 1
+delta_ts = 48
+payload_bytes = 96
+```

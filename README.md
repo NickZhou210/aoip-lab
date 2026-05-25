@@ -33,6 +33,13 @@ ls -lh ~/aoip-lab/project2_rtp_audio_stream/receiver/test.wav
 file ~/aoip-lab/project2_rtp_audio_stream/receiver/test.wav
 ```
 
+The sender defaults to 1 ms packets:
+
+```text
+48 samples/packet
+96 audio payload bytes/packet for mono L16
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
@@ -88,10 +95,10 @@ or save a capture:
 This is not full AES67 yet. It currently covers the RTP audio layer only.
 Next AES67 steps are:
 
-1. Fixed SDP description.
-2. Packet time verification.
-3. Multicast across real network interfaces.
-4. PTP clock synchronization.
+1. Multicast across real network interfaces.
+2. PTP clock synchronization.
+3. Multi-channel scaling.
+4. Receiver compatibility testing.
 
 The first SDP example is:
 

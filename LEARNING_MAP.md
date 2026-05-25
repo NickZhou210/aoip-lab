@@ -222,3 +222,18 @@ payload type = codec mapping
 SSRC = stream identity
 payload bytes = audio carried in that packet
 ```
+
+For the current 1 ms mono L16 sender, the expected values are:
+
+```text
+delta_seq = 1
+delta_ts = 48
+payload_bytes = 96
+```
+
+That comes from:
+
+```text
+48000 samples/second * 0.001 second = 48 samples/packet
+48 samples * 2 bytes/sample * 1 channel = 96 bytes/packet
+```
