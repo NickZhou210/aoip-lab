@@ -292,6 +292,15 @@ cd ~/aoip-lab/project3_ptp/scripts
 
 This summarizes `ptp4l` and `pmc` status in one command.
 
+## Phase 22: capture PTP packets
+
+```bash
+cd ~/aoip-lab/project1_packet_dump/scripts
+./capture_ptp.sh enp0s5 10
+```
+
+This saves a tcpdump capture for UDP 319/320 PTP traffic.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

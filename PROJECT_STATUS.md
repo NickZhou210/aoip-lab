@@ -375,6 +375,25 @@ offsetFromMaster 0.0
 meanPathDelay 0.0
 ```
 
+### PTP Packet Capture
+
+Started.
+
+Added:
+
+```text
+project1_packet_dump/scripts/capture_ptp.sh accepts duration and timestamped output
+project1_packet_dump/scripts/live_ptp_monitor.sh
+project1_packet_dump/scripts/inspect_ptp_capture.sh
+project1_packet_dump/notes/phase28_ptp_packet_capture.md
+```
+
+Current learning target:
+
+```text
+capture UDP 319/320 PTP traffic as a repeatable baseline for later Yamaha/Dante comparisons
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.
