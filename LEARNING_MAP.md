@@ -237,3 +237,10 @@ That comes from:
 48000 samples/second * 0.001 second = 48 samples/packet
 48 samples * 2 bytes/sample * 1 channel = 96 bytes/packet
 ```
+
+When channels increase, timestamp behavior does not change:
+
+```text
+2ch L16 at 1 ms = 48 samples * 2 bytes * 2 channels = 192 bytes
+delta_ts still = 48
+```

@@ -40,6 +40,16 @@ The sender defaults to 1 ms packets:
 96 audio payload bytes/packet for mono L16
 ```
 
+To test 2 channels:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/sender
+./send_rtp_audio.sh 127.0.0.1 5004 1000000 2
+```
+
+With 1 ms packets, 2-channel L16 should produce `payload_bytes=192` while
+`delta_ts` stays `48`.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
