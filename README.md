@@ -141,6 +141,26 @@ To test every configured stream:
 ./run_all_streams.py
 ```
 
+## Phase 9: first PTP check
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./check_ptp_environment.sh enp0s5
+```
+
+This confirms whether `ptp4l`, `phc2sys`, and `pmc` are installed, and whether
+the VM network interface has hardware or software timestamping.
+
+## Phase 10: run ptp4l in observe mode
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./run_ptp4l_software.sh enp0s5
+```
+
+This starts `ptp4l` with software timestamping and `free_running=1`, so the first
+PTP lesson can observe logs without intentionally disciplining the system clock.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

@@ -37,6 +37,10 @@ project1_packet_dump
 project2_rtp_audio_stream
   RTP audio experiment layer
   GStreamer creates and receives L16 RTP audio
+
+project3_ptp
+  PTP timing experiment layer
+  linuxptp checks network clock behavior
 ```
 
 You have already proven this chain:

@@ -225,7 +225,7 @@ Current finding:
 ```text
 enp0s5 has software timestamping only
 PTP Hardware Clock: none
-linuxptp package is not installed yet
+linuxptp package is installed
 systemd-timesyncd/NTP is active
 ```
 
@@ -233,14 +233,14 @@ Added:
 
 ```text
 project3_ptp/scripts/check_ptp_environment.sh
+project3_ptp/scripts/run_ptp4l_software.sh
 project3_ptp/configs/aes67-software-ptp.cfg
 project3_ptp/notes/phase15_ptp_first_checks.md
+project3_ptp/notes/phase16_run_ptp4l_software.md
 ```
 
 Still needed:
 
-- install linuxptp.
-- run environment check again.
 - run first safe `ptp4l` experiment.
 - understand master/slave behavior.
 - measure offset.
