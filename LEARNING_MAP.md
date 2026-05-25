@@ -253,3 +253,16 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 ```
 
 This is the first tool for deciding how a 128-channel stream should be split.
+
+The first conservative architecture is:
+
+```text
+128 channels = 16 RTP streams * 8 channels per stream
+```
+
+Use:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./plan_streams.py --total-channels 128 --channels-per-stream 8
+```

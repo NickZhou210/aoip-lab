@@ -61,6 +61,19 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This shows why 128 channels cannot simply be treated as one ordinary small RTP
 packet stream on a normal 1500-byte MTU network.
 
+## Phase 5: plan stream splitting
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./plan_streams.py --total-channels 128 --channels-per-stream 8
+```
+
+This creates a first 128-channel layout:
+
+```text
+16 RTP streams * 8 channels each
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
