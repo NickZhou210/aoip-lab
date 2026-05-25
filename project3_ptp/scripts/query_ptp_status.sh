@@ -8,13 +8,20 @@ COMMANDS=(
   "GET TIME_STATUS_NP"
 )
 
+if [ "$(id -u)" -eq 0 ]; then
+  PMC=(pmc)
+else
+  PMC=(sudo pmc)
+fi
+
 echo "Querying running ptp4l status with pmc"
 echo
 echo "Keep ptp4l running in another terminal before using this script."
+echo "This script uses sudo for pmc when needed because ptp4l was started as root."
 echo
 
 for command in "${COMMANDS[@]}"; do
   echo "== ${command} =="
-  pmc -u -b 0 "${command}" || true
+  "${PMC[@]}" -u -b 0 "${command}" || true
   echo
 done

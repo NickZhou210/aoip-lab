@@ -34,18 +34,45 @@ cd ~/aoip-lab/project3_ptp/scripts
 The script runs:
 
 ```bash
-pmc -u -b 0 "GET PORT_DATA_SET"
-pmc -u -b 0 "GET CURRENT_DATA_SET"
-pmc -u -b 0 "GET PARENT_DATA_SET"
-pmc -u -b 0 "GET TIME_STATUS_NP"
+sudo pmc -u -b 0 "GET PORT_DATA_SET"
+sudo pmc -u -b 0 "GET CURRENT_DATA_SET"
+sudo pmc -u -b 0 "GET PARENT_DATA_SET"
+sudo pmc -u -b 0 "GET TIME_STATUS_NP"
 ```
 
 Line by line:
 
+- `sudo`: use administrator permission, because `ptp4l` was started as root.
 - `pmc`: PTP management client.
 - `-u`: use the local Unix socket to talk to `ptp4l`.
 - `-b 0`: boundary hop count 0; ask the local PTP process.
 - `GET ...`: ask for one PTP data set.
+
+## If You See Permission Denied
+
+Error:
+
+```text
+uds: bind failed: Permission denied
+failed to open transport
+failed to create pmc
+```
+
+Meaning:
+
+```text
+pmc tried to talk to ptp4l through the local Unix socket
+but the normal user did not have permission
+```
+
+This does not mean PTP failed.
+
+It means:
+
+```text
+ptp4l was started with sudo
+so pmc also needs sudo
+```
 
 ## What To Look For
 
