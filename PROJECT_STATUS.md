@@ -551,6 +551,25 @@ timestamp breaks: 0
 source IP: 10.211.55.6
 ```
 
+### PTP and RTP Same-Capture Test
+
+Started.
+
+Added:
+
+```text
+project1_packet_dump/scripts/capture_ptp_and_multicast_rtp.sh
+project1_packet_dump/scripts/run_ptp_rtp_capture_test.sh
+project1_packet_dump/notes/phase31_ptp_and_rtp_same_capture.md
+```
+
+Purpose:
+
+```text
+capture UDP 319/320 PTP and 16 multicast RTP streams in one pcap.
+verify the timing plane and media plane coexist on enp0s5.
+```
+
 ### Multi-Stream Synchronization
 
 Started.

@@ -258,6 +258,13 @@ cd ~/aoip-lab
 project1_packet_dump/scripts/run_multicast_rtp_capture_test.sh enp0s5 10.211.55.6 8
 ```
 
+To capture PTP and the 16 multicast RTP streams in the same pcap:
+
+```bash
+cd ~/aoip-lab
+project1_packet_dump/scripts/run_ptp_rtp_capture_test.sh enp0s5 10.211.55.6 12
+```
+
 ## Phase 17: sender performance probe
 
 ```bash
