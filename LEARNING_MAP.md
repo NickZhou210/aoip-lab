@@ -2,6 +2,12 @@
 
 This project is not only code. It is a ladder for learning how audio over IP becomes AES67.
 
+For the current checklist of what is working and what is not done yet, read:
+
+```text
+PROJECT_STATUS.md
+```
+
 ## Big Picture
 
 AoIP means audio is moved as network packets instead of analog voltage or a local sound-card stream.

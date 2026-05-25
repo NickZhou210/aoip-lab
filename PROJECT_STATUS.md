@@ -1,0 +1,313 @@
+# Project Status
+
+Last updated: 2026-05-25
+
+## Goal
+
+Build and understand an AES67-style 128-channel AoIP system step by step.
+
+The current architecture target is:
+
+```text
+128 channels
+= 16 RTP streams
+* 8 channels per stream
+```
+
+Current audio format:
+
+```text
+L16
+48 kHz
+1 ms packet time
+RTP payload type 96
+```
+
+## What Is Working
+
+### RTP Audio Basics
+
+Working:
+
+- generate test audio with GStreamer.
+- packetize audio as RTP L16.
+- send RTP over UDP.
+- receive RTP and depayload it.
+- write received audio to WAV.
+
+Verified:
+
+```text
+1ch L16 / 48 kHz / 1 ms
+2ch L16 / 48 kHz / 1 ms
+8ch L16 / 48 kHz / 1 ms
+```
+
+### RTP Header Inspection
+
+Working:
+
+- inspect RTP version.
+- inspect payload type.
+- inspect sequence number.
+- inspect RTP timestamp.
+- inspect SSRC.
+- inspect payload bytes.
+
+Important verified result for 1ch:
+
+```text
+delta_seq = 1
+delta_ts = 48
+payload_bytes = 96
+```
+
+Important verified result for 2ch:
+
+```text
+delta_seq = 1
+delta_ts = 48
+payload_bytes = 192
+```
+
+Important verified result for 8ch:
+
+```text
+delta_seq = 1
+delta_ts = 48
+payload_bytes = 768
+```
+
+### Packet Time
+
+Working:
+
+- sender forces 1 ms packet time.
+
+GStreamer settings:
+
+```text
+min-ptime=1000000
+max-ptime=1000000
+ptime-multiple=1000000
+```
+
+Meaning:
+
+```text
+1 ms = 1,000,000 ns
+48 kHz * 1 ms = 48 samples per packet
+```
+
+### Bandwidth And MTU Calculation
+
+Working:
+
+- calculate payload size.
+- calculate IP packet size.
+- estimate wire bandwidth.
+- check whether a stream fits a normal 1500-byte MTU.
+
+Important result:
+
+```text
+8ch L16 / 1 ms payload = 768 bytes
+8ch L16 / 1 ms IP packet = 808 bytes
+MTU OK
+```
+
+Important warning:
+
+```text
+16ch L16 / 1 ms payload = 1536 bytes
+16ch L16 / 1 ms IP packet = 1576 bytes
+MTU not OK
+```
+
+### 128-Channel Stream Plan
+
+Working:
+
+- generate a 128-channel split plan.
+- store the plan in JSON.
+
+Config:
+
+```text
+project2_rtp_audio_stream/config/streams.json
+```
+
+Plan:
+
+```text
+stream-01: channels 1-8,     port 5004, group 239.69.1.1
+stream-02: channels 9-16,    port 5006, group 239.69.1.2
+...
+stream-16: channels 121-128, port 5034, group 239.69.1.16
+```
+
+### Config-Driven Tools
+
+Working:
+
+- sender reads `streams.json`.
+- receiver reads `streams.json`.
+- SDP generator reads `streams.json`.
+- loopback test runner reads `streams.json`.
+
+Main tools:
+
+```text
+project2_rtp_audio_stream/scripts/send_stream_from_config.py
+project2_rtp_audio_stream/scripts/receive_stream_from_config.py
+project2_rtp_audio_stream/scripts/generate_sdp.py
+project2_rtp_audio_stream/scripts/run_stream_pair.py
+project2_rtp_audio_stream/scripts/run_all_streams.py
+```
+
+### SDP Generation
+
+Working:
+
+- generate one SDP file per RTP stream.
+
+Generated files:
+
+```text
+project2_rtp_audio_stream/sdp/generated/stream-01.sdp
+...
+project2_rtp_audio_stream/sdp/generated/stream-16.sdp
+```
+
+Example:
+
+```text
+c=IN IP4 239.69.1.1/32
+m=audio 5004 RTP/AVP 96
+a=rtpmap:96 L16/48000/8
+a=ptime:1
+a=x-aoip-channel-range:1-8
+```
+
+### Local 128-Channel Loopback Test
+
+Working:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_all_streams.py
+```
+
+Verified result:
+
+```text
+PASS: 16 streams
+```
+
+Meaning:
+
+```text
+16 streams * 8 channels = 128 channels
+```
+
+Each stream locally produced an 8-channel, 48 kHz WAV file.
+
+## What Is Not Done Yet
+
+### PTP
+
+Not done.
+
+PTP is required for real AES67 clock synchronization.
+
+Still needed:
+
+- install/check linuxptp tools.
+- identify clock-capable network interface.
+- run `ptp4l`.
+- understand master/slave behavior.
+- measure offset.
+- decide how GStreamer sender should relate to PTP time.
+
+### Real Multicast Network Testing
+
+Partially explored, not solved.
+
+Current local loopback tests use:
+
+```text
+127.0.0.1
+```
+
+Multicast config exists:
+
+```text
+239.69.1.1 ... 239.69.1.16
+```
+
+Still needed:
+
+- solve VM multicast behavior.
+- test multicast on `enp0s5`.
+- verify multicast traffic with tcpdump/Wireshark.
+- test multicast between two machines or VM and host if possible.
+
+### Multi-Stream Synchronization
+
+Not done.
+
+We can test 16 streams one after another, but not yet all at the same time.
+
+Still needed:
+
+- start all 16 senders concurrently.
+- inspect CPU and bandwidth.
+- check stream alignment conceptually.
+- connect this to PTP.
+
+### Full AES67 Interoperability
+
+Not done.
+
+Still needed:
+
+- confirm SDP compatibility with real AES67 tools/devices.
+- confirm packet time expectations.
+- confirm L16 vs L24 requirements for target devices.
+- add receiver tests using external AES67/Ravenna/Dante-compatible software if available.
+
+### SAP / Discovery
+
+Not done.
+
+Currently SDP files are generated manually.
+
+Still needed:
+
+- decide whether to implement SAP announcement.
+- or load SDP manually in receiver software.
+
+## Current Mental Model
+
+```text
+RTP = audio packet transport
+SDP = description of each RTP stream
+PTP = shared clock for real synchronized playback
+Multicast = network delivery method for shared streams
+```
+
+Current project has strong progress on:
+
+```text
+RTP
+SDP generation
+128-channel stream planning
+local loopback verification
+```
+
+Next major topic:
+
+```text
+PTP
+```
+

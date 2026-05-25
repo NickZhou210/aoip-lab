@@ -2,6 +2,12 @@
 
 This repo is a learning lab for RTP audio, packet capture, and AES67 building blocks.
 
+Current milestone status:
+
+```text
+PROJECT_STATUS.md
+```
+
 ## Current progress
 
 - `project1_packet_dump`: tcpdump helpers for RTP, PTP, and general packet capture.
