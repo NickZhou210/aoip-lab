@@ -257,10 +257,26 @@ no external better PTP grandmaster was visible
 the VM became the local software grandmaster
 ```
 
+First `pmc` query:
+
+```text
+PORT_DATA_SET:    portState MASTER
+CURRENT_DATA_SET: stepsRemoved 0, offsetFromMaster 0.0, meanPathDelay 0.0
+PARENT_DATA_SET:  grandmasterIdentity 001c42.fffe.ee3f40
+TIME_STATUS_NP:   gmPresent false
+```
+
+Meaning:
+
+```text
+pmc can query the running ptp4l process
+the VM is the current software grandmaster
+there is no external grandmaster visible yet
+```
+
 Still needed:
 
 - understand master/slave behavior.
-- query running `ptp4l` with `pmc`.
 - measure offset.
 - decide how GStreamer sender should relate to PTP time.
 

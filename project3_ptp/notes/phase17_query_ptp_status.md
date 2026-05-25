@@ -147,3 +147,119 @@ Can pmc talk to ptp4l?
 ```
 
 If yes, we have moved from "watching logs" to "querying PTP state."
+
+## Observed Result On This VM
+
+The first run without `sudo` failed:
+
+```text
+uds: bind failed: Permission denied
+failed to open transport
+failed to create pmc
+```
+
+After the script was updated to use `sudo pmc`, the query worked.
+
+### `PORT_DATA_SET`
+
+Observed:
+
+```text
+portIdentity            001c42.fffe.ee3f40-1
+portState               MASTER
+logMinDelayReqInterval  0
+logAnnounceInterval     1
+announceReceiptTimeout  3
+logSyncInterval         0
+delayMechanism          1
+versionNumber           2
+```
+
+Meaning:
+
+```text
+the real network port is enp0s5
+the port is in MASTER state
+this VM is sending PTP timing as a master
+PTP version is 2
+```
+
+### `CURRENT_DATA_SET`
+
+Observed:
+
+```text
+stepsRemoved     0
+offsetFromMaster 0.0
+meanPathDelay    0.0
+```
+
+Meaning:
+
+```text
+stepsRemoved = 0 because this VM is the grandmaster
+offsetFromMaster = 0 because a master is not following another master
+meanPathDelay = 0 because there is no upstream master path to measure
+```
+
+This is expected for a single visible PTP clock.
+
+### `PARENT_DATA_SET`
+
+Observed:
+
+```text
+parentPortIdentity   001c42.fffe.ee3f40-0
+grandmasterPriority1 128
+gm.ClockClass        248
+gm.ClockAccuracy     0xfe
+grandmasterPriority2 128
+grandmasterIdentity  001c42.fffe.ee3f40
+```
+
+Meaning:
+
+```text
+the parent and grandmaster are this same VM
+priority1 and priority2 are both 128 from our config
+clockClass 248 means this is not a highly accurate traceable grandmaster
+```
+
+### `TIME_STATUS_NP`
+
+Observed:
+
+```text
+master_offset +0
+cumulativeScaledRateOffset +0.000000000
+gmPresent false
+gmIdentity 001c42.fffe.ee3f40
+```
+
+Meaning:
+
+```text
+there is no external grandmaster present
+the grandmaster identity still points to this VM
+there is no measured master offset because this VM is the master
+```
+
+## Phase 17 Conclusion
+
+We have now proved:
+
+```text
+ptp4l can run
+pmc can query ptp4l
+enp0s5 is in MASTER state
+the VM is acting as a software grandmaster
+```
+
+We have not proved:
+
+```text
+slave synchronization
+offset measurement to an external grandmaster
+hardware timestamp precision
+AES67-grade timing accuracy
+```
