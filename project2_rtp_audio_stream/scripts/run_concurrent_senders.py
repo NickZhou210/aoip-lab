@@ -23,6 +23,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run configured RTP senders concurrently")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG), help="path to streams.json")
     parser.add_argument("--host", default="127.0.0.1", help="destination host for every sender")
+    parser.add_argument(
+        "--use-config-groups",
+        action="store_true",
+        help="send each stream to its multicast group from streams.json instead of --host",
+    )
     parser.add_argument("--iface", default="enp0s5", help="multicast interface")
     parser.add_argument("--duration", type=float, default=5.0, help="seconds to run; use 0 to run until Ctrl+C")
     parser.add_argument("--startup-delay", type=float, default=0.05, help="delay between process starts")
@@ -74,7 +79,7 @@ def main() -> None:
     print("Concurrent RTP sender test")
     print(f"streams:          {plan['stream_count']}")
     print(f"total_channels:   {plan['total_channels']}")
-    print(f"host:             {args.host}")
+    print(f"host:             {'streams.json groups' if args.use_config_groups else args.host}")
     print(f"duration:         {'until Ctrl+C' if args.duration == 0 else f'{args.duration:g}s'}")
     print(f"log_dir:          {log_dir}")
     print()
@@ -90,13 +95,13 @@ def main() -> None:
                 args.config,
                 "--stream",
                 str(stream["id"]),
-                "--host",
-                args.host,
                 "--iface",
                 args.iface,
                 "--freq",
                 str(freq),
             ]
+            if not args.use_config_groups:
+                command.extend(["--host", args.host])
 
             process = subprocess.Popen(
                 command,
@@ -109,7 +114,7 @@ def main() -> None:
             print(
                 f"started {stream['name']} "
                 f"pid={process.pid} "
-                f"dest={args.host}:{stream['port']} "
+                f"dest={(stream['group'] if args.use_config_groups else args.host)}:{stream['port']} "
                 f"channels={stream['channel_start']}-{stream['channel_end']} "
                 f"freq={freq}"
             )

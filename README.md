@@ -245,6 +245,12 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This verifies each configured stream reaches 20 RTP packets with
 `payload_bytes=768` and `delta_ts=48`.
 
+For multicast groups from `streams.json`:
+
+```bash
+./run_concurrent_sender_monitor.py --use-config-groups --iface enp0s5 --iface-ip 10.211.55.6 --count 20
+```
+
 ## Phase 17: sender performance probe
 
 ```bash

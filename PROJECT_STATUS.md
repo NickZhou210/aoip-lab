@@ -481,7 +481,7 @@ Still needed:
 
 ### Real Multicast Network Testing
 
-Partially explored, not solved.
+Started and passed for local VM multicast loopback.
 
 Current local loopback tests use:
 
@@ -495,10 +495,26 @@ Multicast config exists:
 239.69.1.1 ... 239.69.1.16
 ```
 
+Added:
+
+```text
+project2_rtp_audio_stream/notes/phase29_multicast_16_stream_test.md
+run_concurrent_senders.py supports --use-config-groups
+monitor_all_streams.py supports --use-config-groups
+run_concurrent_sender_monitor.py supports --use-config-groups
+```
+
+Observed:
+
+```text
+16 streams reached 20 RTP packets each.
+payload_bytes = 768
+delta_seq = 1
+delta_ts = 48
+```
+
 Still needed:
 
-- solve VM multicast behavior.
-- test multicast on `enp0s5`.
 - verify multicast traffic with tcpdump/Wireshark.
 - test multicast between two machines or VM and host if possible.
 

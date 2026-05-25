@@ -37,6 +37,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Monitor all configured RTP streams")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG), help="path to streams.json")
     parser.add_argument("--host", default="127.0.0.1", help="address or multicast group to listen on")
+    parser.add_argument(
+        "--use-config-groups",
+        action="store_true",
+        help="join each stream multicast group from streams.json instead of --host",
+    )
     parser.add_argument("--count", type=int, default=20, help="packets to collect per stream")
     parser.add_argument("--timeout", type=float, default=5.0, help="overall monitor timeout in seconds")
     parser.add_argument("--iface-ip", default="10.211.55.6", help="local interface IP for multicast joins")
@@ -131,13 +136,14 @@ def main() -> None:
     sockets: list[socket.socket] = []
 
     for stream in plan["streams"]:
-        sock = open_rtp_socket(args.host, stream["port"], args.iface_ip)
+        address = stream["group"] if args.use_config_groups else args.host
+        sock = open_rtp_socket(address, stream["port"], args.iface_ip)
         sockets.append(sock)
         selector.register(sock, selectors.EVENT_READ, stream["id"])
 
     print("Monitoring all RTP streams")
     print(f"streams:      {plan['stream_count']}")
-    print(f"host:         {args.host}")
+    print(f"host:         {'streams.json groups' if args.use_config_groups else args.host}")
     print(f"target_count: {args.count}")
     print(f"timeout:      {args.timeout:g}s")
     print()

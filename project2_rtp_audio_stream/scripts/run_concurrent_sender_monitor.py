@@ -18,6 +18,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run concurrent senders and monitor RTP headers")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG), help="path to streams.json")
     parser.add_argument("--host", default="127.0.0.1", help="sender destination and monitor bind address")
+    parser.add_argument(
+        "--use-config-groups",
+        action="store_true",
+        help="send and monitor each stream using multicast groups from streams.json",
+    )
+    parser.add_argument("--iface", default="enp0s5", help="sender multicast interface")
+    parser.add_argument("--iface-ip", default="10.211.55.6", help="local interface IP for multicast joins")
     parser.add_argument("--count", type=int, default=20, help="packets to monitor per stream")
     parser.add_argument("--sender-duration", type=float, default=6.0, help="maximum sender runtime")
     parser.add_argument("--monitor-timeout", type=float, default=5.0, help="monitor timeout")
@@ -46,7 +53,12 @@ def main() -> None:
         args.host,
         "--duration",
         str(args.sender_duration),
+        "--iface",
+        args.iface,
     ]
+    if args.use_config_groups:
+        sender_cmd.append("--use-config-groups")
+
     monitor_cmd = [
         str(SCRIPT_DIR / "monitor_all_streams.py"),
         "--config",
@@ -57,7 +69,11 @@ def main() -> None:
         str(args.count),
         "--timeout",
         str(args.monitor_timeout),
+        "--iface-ip",
+        args.iface_ip,
     ]
+    if args.use_config_groups:
+        monitor_cmd.append("--use-config-groups")
 
     print("Starting concurrent senders")
     sender = subprocess.Popen(sender_cmd)
