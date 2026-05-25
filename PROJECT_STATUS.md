@@ -385,6 +385,7 @@ Added:
 project1_packet_dump/scripts/capture_ptp.sh accepts duration and timestamped output
 project1_packet_dump/scripts/live_ptp_monitor.sh
 project1_packet_dump/scripts/inspect_ptp_capture.sh
+project1_packet_dump/scripts/summarize_ptp_capture.sh
 project1_packet_dump/notes/phase28_ptp_packet_capture.md
 ```
 
@@ -392,6 +393,16 @@ Current learning target:
 
 ```text
 capture UDP 319/320 PTP traffic as a repeatable baseline for later Yamaha/Dante comparisons
+```
+
+Verified:
+
+```text
+ptp-enp0s5-20260525-163852.pcap contains 23 PTP UDP packets
+UDP 319 packets: 9
+UDP 320 packets: 14
+source: 10.211.55.6
+destination: 224.0.1.129
 ```
 
 ### RTP Timestamp And PTP Time

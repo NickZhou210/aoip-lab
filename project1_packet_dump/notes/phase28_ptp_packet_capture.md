@@ -92,6 +92,12 @@ cd ~/aoip-lab/project1_packet_dump/scripts
 
 This prints the first packets with tcpdump.
 
+For a count summary:
+
+```bash
+./summarize_ptp_capture.sh ../captures/<file>.pcap
+```
+
 ## What To Check
 
 For the current VM-only PTP master test:
@@ -110,3 +116,40 @@ It proves:
 ptp4l is emitting PTP traffic on the selected interface
 the project can save a reproducible PTP pcap for comparison
 ```
+
+## Observed Result On Ubuntu
+
+Capture:
+
+```text
+project1_packet_dump/captures/ptp-enp0s5-20260525-163852.pcap
+```
+
+Summary:
+
+```text
+pcap capture file, microsecond ts, Ethernet
+udp_319_event:   9
+udp_320_general: 14
+total PTP UDP packets: 23
+```
+
+Preview:
+
+```text
+2026-05-25 16:38:57.599285 IP 10.211.55.6.320 > 224.0.1.129.320: PTPv18
+2026-05-25 16:38:57.602086 IP 10.211.55.6.319 > 224.0.1.129.319: PTPv18
+2026-05-25 16:38:57.602300 IP 10.211.55.6.320 > 224.0.1.129.320: PTPv18
+```
+
+Interpretation:
+
+```text
+PTP traffic was captured from the VM IP 10.211.55.6
+PTP multicast destination 224.0.1.129 is present
+UDP 319 and UDP 320 are both present
+```
+
+`tcpdump` may print `bad udp cksum` on virtual interfaces because of checksum
+offload behavior. In this context, the important first check is that PTP traffic
+exists on the expected ports and multicast address.
