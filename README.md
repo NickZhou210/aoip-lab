@@ -245,6 +245,16 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This verifies each configured stream reaches 20 RTP packets with
 `payload_bytes=768` and `delta_ts=48`.
 
+## Phase 17: sender performance probe
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_sender_performance_probe.py --duration 5 --interval 1
+```
+
+This measures basic CPU, memory, and loopback bitrate while the 16 RTP senders
+are running.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

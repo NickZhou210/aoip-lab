@@ -412,9 +412,26 @@ gst_count=0
 sender_count=0
 ```
 
+Added:
+
+```text
+project2_rtp_audio_stream/scripts/run_sender_performance_probe.py
+project2_rtp_audio_stream/notes/phase23_sender_performance_probe.md
+```
+
+Verified:
+
+```text
+avg_cpu_percent:       13.79
+avg_tx_mbps on lo:     177.698
+avg_rx_mbps on lo:     177.698
+peak_sender_rss_mib:   384.4
+gst_count=0
+sender_count=0
+```
+
 Still needed:
 
-- inspect CPU and bandwidth.
 - check stream alignment conceptually.
 - connect this to PTP.
 
