@@ -54,6 +54,45 @@ sequence breaks = 0
 timestamp breaks = 0
 ```
 
+## Result
+
+Test capture:
+
+```text
+capture: project1_packet_dump/captures/ptp-and-multicast-rtp-enp0s5-20260525-171752.pcap
+size: 8.9M
+source IP: 10.211.55.6
+```
+
+PTP summary:
+
+```text
+udp_319_320_total = 28
+udp_319_event = 11
+udp_320_general = 17
+PTP destination = 224.0.1.129
+```
+
+RTP summary:
+
+```text
+configured_streams = 16
+udp_packets_seen = 11072
+configured_rtp_packets = 11044
+PASS: 16 configured multicast RTP streams found
+UDP payload bytes = 780
+RTP audio payload bytes = 768
+RTP payload type = 96
+sequence breaks = 0
+timestamp breaks = 0
+```
+
+The total UDP count includes both traffic classes:
+
+```text
+11072 total UDP packets = 28 PTP packets + 11044 configured RTP packets
+```
+
 ## Meaning
 
 If both summaries pass, the lab has produced one capture containing:

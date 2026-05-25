@@ -570,6 +570,23 @@ capture UDP 319/320 PTP and 16 multicast RTP streams in one pcap.
 verify the timing plane and media plane coexist on enp0s5.
 ```
 
+Verified with interactive Ubuntu run:
+
+```text
+capture: project1_packet_dump/captures/ptp-and-multicast-rtp-enp0s5-20260525-171752.pcap
+PTP packets total: 28
+PTP event packets UDP 319: 11
+PTP general packets UDP 320: 17
+RTP configured packets: 11044
+total UDP packets in capture: 11072
+PASS: 16 configured multicast RTP streams found
+RTP UDP payload bytes: 780
+RTP audio payload bytes: 768
+RTP payload type: 96
+sequence breaks: 0
+timestamp breaks: 0
+```
+
 ### Multi-Stream Synchronization
 
 Started.
