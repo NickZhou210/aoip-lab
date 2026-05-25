@@ -274,6 +274,15 @@ cd ~/aoip-lab/project3_ptp/scripts
 This compares the learning `ptp4l` configs for priority, domain, and client-only
 behavior.
 
+## Phase 20: PTP domain experiment
+
+```bash
+cd ~/aoip-lab/project3_ptp
+sudo timeout 8s ptp4l -i enp0s5 -f configs/aes67-domain-1.cfg -m
+```
+
+This checks that the domain 1 config starts and forms its own timing island.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

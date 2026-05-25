@@ -324,6 +324,23 @@ preferred-master manually reached MASTER
 client-only manually started and did not show LISTENING to MASTER in the 8 second window
 ```
 
+### PTP Domain Experiment
+
+Started.
+
+Added:
+
+```text
+project3_ptp/notes/phase26_ptp_domain_experiment.md
+```
+
+Current learning target:
+
+```text
+domainNumber separates independent PTP timing islands
+sender and receiver must use the same PTP domain to share clock
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.
