@@ -255,6 +255,15 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This measures basic CPU, memory, and loopback bitrate while the 16 RTP senders
 are running.
 
+## Phase 18: PTP BMCA model
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./compare_ptp_clocks.py
+```
+
+This models how PTP chooses a Grandmaster from priority and clock quality fields.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

@@ -274,6 +274,24 @@ the VM is the current software grandmaster
 there is no external grandmaster visible yet
 ```
 
+### PTP BMCA Grandmaster Selection
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/compare_ptp_clocks.py
+project3_ptp/notes/phase24_ptp_bmca.md
+```
+
+Current learning target:
+
+```text
+BMCA decides the Grandmaster from priority1, clock quality, priority2, and clock identity
+lower values win at the first field that differs
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.
