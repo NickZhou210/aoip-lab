@@ -225,6 +225,16 @@ To demonstrate a 1 ms stream offset:
 ./calculate_multistream_alignment.py --packet-index 100 --skew-stream 2 --skew-samples 48
 ```
 
+## Phase 15: run 16 RTP senders concurrently
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_concurrent_senders.py --duration 5
+```
+
+This starts all 16 configured 8-channel RTP senders at the same time, using
+local unicast by default.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

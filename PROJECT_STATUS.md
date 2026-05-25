@@ -373,13 +373,28 @@ Still needed:
 
 ### Multi-Stream Synchronization
 
-Not done.
+Started.
 
 We can test 16 streams one after another, but not yet all at the same time.
 
+Added:
+
+```text
+project2_rtp_audio_stream/scripts/run_concurrent_senders.py
+project2_rtp_audio_stream/notes/phase21_concurrent_senders.md
+```
+
+Verified:
+
+```text
+started_count: 16
+PASS: 16 senders ran concurrently
+gst_count=0
+sender_count=0
+```
+
 Still needed:
 
-- start all 16 senders concurrently.
 - inspect CPU and bandwidth.
 - check stream alignment conceptually.
 - connect this to PTP.
