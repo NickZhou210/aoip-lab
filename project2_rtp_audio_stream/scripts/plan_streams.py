@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import math
 
 
@@ -23,6 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-group", default="239.69.1.", help="multicast group prefix")
     parser.add_argument("--base-group-index", type=int, default=1, help="first multicast group suffix")
     parser.add_argument("--mtu", type=int, default=DEFAULT_MTU_BYTES, help="IP MTU bytes")
+    parser.add_argument("--json-out", help="write the stream plan to this JSON file")
     return parser.parse_args()
 
 
@@ -33,6 +35,51 @@ def main() -> None:
     samples_per_packet = round(args.rate * args.ptime_ms / 1000)
     max_payload = args.mtu - RTP_UDP_IPV4_HEADER_BYTES
     stream_count = math.ceil(args.total_channels / args.channels_per_stream)
+
+    streams = []
+    for index in range(stream_count):
+        first_channel = index * args.channels_per_stream + 1
+        last_channel = min((index + 1) * args.channels_per_stream, args.total_channels)
+        channels = last_channel - first_channel + 1
+        payload = samples_per_packet * bytes_per_sample * channels
+        ip_packet = payload + RTP_UDP_IPV4_HEADER_BYTES
+        group = f"{args.base_group}{args.base_group_index + index}"
+        port = args.base_port + index * args.port_step
+        mtu_ok = ip_packet <= args.mtu
+        streams.append(
+            {
+                "id": index + 1,
+                "name": f"stream-{index + 1:02d}",
+                "group": group,
+                "port": port,
+                "payload_type": 96,
+                "channel_start": first_channel,
+                "channel_end": last_channel,
+                "channels": channels,
+                "payload_bytes": payload,
+                "ip_packet_bytes": ip_packet,
+                "mtu_ok": mtu_ok,
+            }
+        )
+
+    plan = {
+        "total_channels": args.total_channels,
+        "channels_per_stream": args.channels_per_stream,
+        "stream_count": stream_count,
+        "sample_rate_hz": args.rate,
+        "bits_per_sample": args.bits,
+        "encoding": f"L{args.bits}",
+        "packet_time_ms": args.ptime_ms,
+        "samples_per_packet": samples_per_packet,
+        "mtu_bytes": args.mtu,
+        "max_payload_for_mtu": max_payload,
+        "streams": streams,
+    }
+
+    if args.json_out:
+        with open(args.json_out, "w", encoding="utf-8") as file:
+            json.dump(plan, file, indent=2)
+            file.write("\n")
 
     print("RTP stream split plan")
     print()
@@ -47,27 +94,18 @@ def main() -> None:
     print()
     print("idx group        port channels    payload ip_packet mtu_ok")
 
-    for index in range(stream_count):
-        first_channel = index * args.channels_per_stream + 1
-        last_channel = min((index + 1) * args.channels_per_stream, args.total_channels)
-        channels = last_channel - first_channel + 1
-        payload = samples_per_packet * bytes_per_sample * channels
-        ip_packet = payload + RTP_UDP_IPV4_HEADER_BYTES
-        group = f"{args.base_group}{args.base_group_index + index}"
-        port = args.base_port + index * args.port_step
-        mtu_ok = "yes" if ip_packet <= args.mtu else "no"
-
+    for stream in streams:
+        mtu_ok = "yes" if stream["mtu_ok"] else "no"
         print(
-            f"{index + 1:>3} "
-            f"{group:<12} "
-            f"{port:<5} "
-            f"{first_channel:>3}-{last_channel:<3} "
-            f"{payload:>7} "
-            f"{ip_packet:>9} "
+            f"{stream['id']:>3} "
+            f"{stream['group']:<12} "
+            f"{stream['port']:<5} "
+            f"{stream['channel_start']:>3}-{stream['channel_end']:<3} "
+            f"{stream['payload_bytes']:>7} "
+            f"{stream['ip_packet_bytes']:>9} "
             f"{mtu_ok}"
         )
 
 
 if __name__ == "__main__":
     main()
-

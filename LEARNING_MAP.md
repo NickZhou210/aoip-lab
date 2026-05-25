@@ -266,3 +266,12 @@ Use:
 cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 ./plan_streams.py --total-channels 128 --channels-per-stream 8
 ```
+
+The same plan is stored in:
+
+```text
+project2_rtp_audio_stream/config/streams.json
+```
+
+From here, sender scripts and SDP generation should read the config instead of
+hard-coding 16 separate streams.

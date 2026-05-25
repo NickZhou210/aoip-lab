@@ -74,6 +74,12 @@ This creates a first 128-channel layout:
 16 RTP streams * 8 channels each
 ```
 
+The current generated config is:
+
+```text
+project2_rtp_audio_stream/config/streams.json
+```
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
