@@ -2,6 +2,15 @@
 
 This repo is a learning lab for RTP audio, packet capture, and AES67 building blocks.
 
+## Philosophy
+
+This project is built as a learning lab, not as a production-grade AES67 implementation.
+
+I am a live sound / pro-audio engineer learning networked audio from the packet level upward.  
+Some parts are AI-assisted, but every committed phase should be reproducible, observable, and gradually explainable.
+
+The goal is not to pretend mastery, but to reduce the black box around AOIP systems for myself and other audio engineers.
+
 Current milestone status:
 
 ```text
