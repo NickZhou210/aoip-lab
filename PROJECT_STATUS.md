@@ -274,6 +274,33 @@ the VM is the current software grandmaster
 there is no external grandmaster visible yet
 ```
 
+### RTP Timestamp And PTP Time
+
+Started.
+
+Added:
+
+```text
+project3_ptp/scripts/observe_rtp_timestamp_clock.py
+project3_ptp/notes/phase18_rtp_timestamp_vs_ptp_time.md
+```
+
+Current learning target:
+
+```text
+PTP time is the shared wall clock
+RTP timestamp is the audio media clock
+48 kHz audio advances 48 RTP timestamp ticks per 1 ms packet
+```
+
+Verified with stream-01:
+
+```text
+delta_ts = 48
+rtp_elapsed_ms advances by 1 ms per packet
+payload_bytes = 768
+```
+
 Still needed:
 
 - understand master/slave behavior.

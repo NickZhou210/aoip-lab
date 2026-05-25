@@ -173,6 +173,25 @@ cd ~/aoip-lab/project3_ptp/scripts
 This uses `pmc` to ask the running `ptp4l` process for its port, parent, current
 time, and grandmaster status.
 
+## Phase 12: observe RTP timestamp as audio time
+
+Terminal 1:
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./observe_rtp_timestamp_clock.py --group 127.0.0.1 --port 5004 --count 20
+```
+
+Terminal 2:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./send_stream_from_config.py --stream 1 --host 127.0.0.1
+```
+
+For stream 1, the RTP timestamp should advance by `48` per packet while the
+payload remains `768` bytes.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

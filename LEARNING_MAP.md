@@ -339,3 +339,11 @@ PTP learning starts in:
 ```text
 project3_ptp
 ```
+
+The next bridge is:
+
+```text
+PTP shared time
+-> RTP media timestamp
+-> receiver playback time
+```
