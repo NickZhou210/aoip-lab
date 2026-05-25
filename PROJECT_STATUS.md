@@ -292,6 +292,36 @@ BMCA decides the Grandmaster from priority1, clock quality, priority2, and clock
 lower values win at the first field that differs
 ```
 
+### PTP Config Experiments
+
+Started.
+
+Added:
+
+```text
+project3_ptp/configs/aes67-preferred-master.cfg
+project3_ptp/configs/aes67-backup-master.cfg
+project3_ptp/configs/aes67-domain-1.cfg
+project3_ptp/configs/aes67-client-only.cfg
+project3_ptp/scripts/summarize_ptp_configs.py
+project3_ptp/notes/phase25_ptp_config_experiments.md
+```
+
+Current learning target:
+
+```text
+priority controls BMCA preference
+domainNumber separates timing islands
+clientOnly prevents a node from becoming Grandmaster
+```
+
+Verified:
+
+```text
+summarize_ptp_configs.py reads all five config files on Ubuntu
+sudo is required for live ptp4l config start tests
+```
+
 ### RTP Timestamp And PTP Time
 
 Started.

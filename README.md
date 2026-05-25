@@ -264,6 +264,16 @@ cd ~/aoip-lab/project3_ptp/scripts
 
 This models how PTP chooses a Grandmaster from priority and clock quality fields.
 
+## Phase 19: PTP config experiments
+
+```bash
+cd ~/aoip-lab/project3_ptp/scripts
+./summarize_ptp_configs.py
+```
+
+This compares the learning `ptp4l` configs for priority, domain, and client-only
+behavior.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
