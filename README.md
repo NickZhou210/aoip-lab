@@ -235,6 +235,16 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 This starts all 16 configured 8-channel RTP senders at the same time, using
 local unicast by default.
 
+## Phase 16: monitor all 16 RTP streams
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./run_concurrent_sender_monitor.py --count 20
+```
+
+This verifies each configured stream reaches 20 RTP packets with
+`payload_bytes=768` and `delta_ts=48`.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:

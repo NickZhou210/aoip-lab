@@ -393,6 +393,25 @@ gst_count=0
 sender_count=0
 ```
 
+Added:
+
+```text
+project2_rtp_audio_stream/scripts/monitor_all_streams.py
+project2_rtp_audio_stream/scripts/run_concurrent_sender_monitor.py
+project2_rtp_audio_stream/notes/phase22_monitor_all_streams.md
+```
+
+Verified:
+
+```text
+PASS: 16 streams reached 20 packets
+each stream: payload_bytes = 768
+each stream: delta_seq = 1
+each stream: delta_ts = 48
+gst_count=0
+sender_count=0
+```
+
 Still needed:
 
 - inspect CPU and bandwidth.
