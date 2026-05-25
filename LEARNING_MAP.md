@@ -275,3 +275,16 @@ project2_rtp_audio_stream/config/streams.json
 
 From here, sender scripts and SDP generation should read the config instead of
 hard-coding 16 separate streams.
+
+The first config-driven sender is:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./send_stream_from_config.py --stream 1 --host 127.0.0.1
+```
+
+For `stream-01`, the expected RTP payload is:
+
+```text
+48 samples * 2 bytes * 8 channels = 768 bytes
+```

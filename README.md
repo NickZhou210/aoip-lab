@@ -80,6 +80,24 @@ The current generated config is:
 project2_rtp_audio_stream/config/streams.json
 ```
 
+## Phase 6: send one stream from config
+
+Terminal 1:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./inspect_rtp_packets.py --group 127.0.0.1 --port 5004 --count 10
+```
+
+Terminal 2:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./send_stream_from_config.py --stream 1 --host 127.0.0.1
+```
+
+For stream 1, expect `payload_bytes=768` and `delta_ts=48`.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
