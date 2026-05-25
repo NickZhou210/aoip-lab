@@ -244,3 +244,12 @@ When channels increase, timestamp behavior does not change:
 2ch L16 at 1 ms = 48 samples * 2 bytes * 2 channels = 192 bytes
 delta_ts still = 48
 ```
+
+But packet size grows linearly with channel count. Use the calculator:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./calc_stream.py --channels 128
+```
+
+This is the first tool for deciding how a 128-channel stream should be split.

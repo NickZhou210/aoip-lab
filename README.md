@@ -50,6 +50,17 @@ cd ~/aoip-lab/project2_rtp_audio_stream/sender
 With 1 ms packets, 2-channel L16 should produce `payload_bytes=192` while
 `delta_ts` stays `48`.
 
+## Phase 4: calculate bandwidth and MTU
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./calc_stream.py --channels 2
+./calc_stream.py --channels 128
+```
+
+This shows why 128 channels cannot simply be treated as one ordinary small RTP
+packet stream on a normal 1500-byte MTU network.
+
 ## Phase 2: multicast RTP L16
 
 Terminal 1:
