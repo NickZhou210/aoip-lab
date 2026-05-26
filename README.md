@@ -289,6 +289,13 @@ cd ~/aoip-lab/project2_rtp_audio_stream/scripts
 ./validate_sdp_clock_lines.py --sdp-dir ../sdp/generated-ptp --ptp-grandmaster 001c42.fffe.ee3f40 --ptp-domain 0 --mediaclk-direct 0
 ```
 
+To derive a receiver command from one SDP file:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./receive_stream_from_sdp.py ../sdp/generated-ptp/stream-01.sdp --dry-run
+```
+
 ## Phase 17: sender performance probe
 
 ```bash

@@ -645,6 +645,38 @@ mediaclk direct: 0
 PASS: 16 SDP files contain expected RTP and PTP clock reference lines
 ```
 
+### Receiver From SDP
+
+Started.
+
+Added:
+
+```text
+project2_rtp_audio_stream/scripts/receive_stream_from_sdp.py
+project2_rtp_audio_stream/notes/phase34_receive_from_sdp.md
+```
+
+Purpose:
+
+```text
+read one SDP file and derive the receiver-side GStreamer command.
+prove the receiver can consume SDP fields instead of relying only on streams.json.
+```
+
+Verified:
+
+```text
+SDP: project2_rtp_audio_stream/sdp/generated-ptp/stream-01.sdp
+Group: 239.69.1.1
+Port: 5004
+Format: L16/48000/8
+Payload type: 96
+Packet time: 1 ms
+ts-refclk: a=ts-refclk:ptp=IEEE1588-2008:00-1C-42-FF-FE-EE-3F-40:0
+mediaclk: a=mediaclk:direct=0
+dry-run receiver command generated successfully.
+```
+
 ### Multi-Stream Synchronization
 
 Started.
