@@ -617,6 +617,34 @@ stream-08 media_span_ms: 733.000, capture_span_ms: 733.009, span_error_ms: 0.009
 stream-16 media_span_ms: 188.000, capture_span_ms: 187.973, span_error_ms: -0.027
 ```
 
+### SDP PTP Clock Reference
+
+Started.
+
+Added:
+
+```text
+project2_rtp_audio_stream/scripts/validate_sdp_clock_lines.py
+project2_rtp_audio_stream/notes/phase33_ptp_sdp_clock_reference.md
+```
+
+Purpose:
+
+```text
+generate SDP files that include ts-refclk and mediaclk clock reference lines.
+validate that all 16 stream SDP files carry the expected PTP Grandmaster/domain.
+```
+
+Verified:
+
+```text
+generated SDP directory: project2_rtp_audio_stream/sdp/generated-ptp
+PTP Grandmaster: 00-1C-42-FF-FE-EE-3F-40
+PTP domain: 0
+mediaclk direct: 0
+PASS: 16 SDP files contain expected RTP and PTP clock reference lines
+```
+
 ### Multi-Stream Synchronization
 
 Started.

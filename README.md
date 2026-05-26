@@ -281,6 +281,14 @@ cd ~/aoip-lab
 project3_ptp/scripts/derive_rtp_ptp_anchor_from_pcap.py project1_packet_dump/captures/<combined-ptp-rtp-capture>.pcap
 ```
 
+To generate and validate SDP files with PTP clock reference lines:
+
+```bash
+cd ~/aoip-lab/project2_rtp_audio_stream/scripts
+./generate_sdp.py --output-dir ../sdp/generated-ptp --ptp-grandmaster 001c42.fffe.ee3f40 --ptp-domain 0 --mediaclk-direct 0
+./validate_sdp_clock_lines.py --sdp-dir ../sdp/generated-ptp --ptp-grandmaster 001c42.fffe.ee3f40 --ptp-domain 0 --mediaclk-direct 0
+```
+
 ## Phase 17: sender performance probe
 
 ```bash
